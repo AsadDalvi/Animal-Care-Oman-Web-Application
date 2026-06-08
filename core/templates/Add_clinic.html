@@ -1,0 +1,18 @@
+{% extends 'ACO.html' %}
+{% load static %}
+
+{% block content %}
+<div class="clinic-form">
+    <h2>{% if clinic %}Edit{% else %}Add{% endif %} Clinic</h2>
+    <div class="form-wrapper">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">{% if clinic %}Save Changes{% else %}Add Clinic{% endif %}</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+
+ <!-- HTML as the file input field is handled automatically by Django's form rendering. -->

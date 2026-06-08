@@ -1,0 +1,52 @@
+{% extends 'ACO.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="dashboard-container">
+        <h2>Your Dashboard</h2>
+        <p class="welcome-message">Welcome, {{ user.username }}!</p>
+
+        <div class="dashboard-section">
+            <h3>Your Reviews</h3>
+            <h4>Clinic Reviews</h4>
+            <ul class="reviews-list">
+                {% for review in clinic_reviews %}
+                    <li>
+                        <strong>{{ review.clinic.name }}</strong>: {{ review.comment }} (Rated: {{ review.rating }}/5) - {{ review.date_submitted }}
+                    </li>
+                {% empty %}
+                    <p>No clinic reviews yet.</p>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="dashboard-section">
+            <h3>Your Profile</h3>
+            <div class="profile-card">
+                <p><strong>Username:</strong> {{ user.username }}</p>
+                <p><strong>Email:</strong> {{ user.email }}</p>
+            </div>
+        </div>
+
+        <div class="dashboard-section">
+            <h3>Edit Profile</h3>
+            <form method="POST" class="edit-profile-form">
+                {% csrf_token %}
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" value="{{ user.username }}" required><br><br>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" value="{{ user.email }}" required><br><br>
+
+                <button type="submit">Save Changes</button>
+            </form>
+        </div>
+
+        <div class="dashboard-section">
+            <form action="{% url 'logout' %}" method="post" class="logout-form">
+                {% csrf_token %}
+                <button type="submit" class="logout-btn">LOGOUT</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

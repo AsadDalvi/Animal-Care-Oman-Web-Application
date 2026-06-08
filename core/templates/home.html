@@ -1,0 +1,64 @@
+{% extends 'ACO.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- Home Page Content -->
+<div class="home-container">
+    <!-- Left Section (Images of first set of pets) -->
+    <div class="left-images">
+        <img src="{% static 'images/birds1.png' %}" alt="Bird">
+        <img src="{% static 'images/birds2.png' %}" alt="Bird">
+        <img src="{% static 'images/birds3.png' %}" alt="Bird">
+        <img src="{% static 'images/cat111.png' %}" alt="Cat">
+        <img src="{% static 'images/cat222.png' %}" alt="Cat">
+        <img src="{% static 'images/cat333.png' %}" alt="Cat">
+        <img src="{% static 'images/chinchilla1.png' %}" alt="Chinchilla">
+        <img src="{% static 'images/chinchilla2.png' %}" alt="Chinchilla">
+    </div>
+
+    <!-- Main Content Section -->
+    <div class="info-container">
+        <h1>Welcome to Animal Care Oman</h1>
+        <p>Animal Care Oman is your ultimate destination for trusted pet care in Oman. Whether you need veterinary services, expert tips, or answers to your pet-related questions, we’re here to help!</p>
+
+        <!-- Info Sections with Buttons -->
+        <div class="info-section">
+            <h2>Veterinary Directory</h2>
+            <p>Find a list of trusted veterinarians in Oman. Use our directory to locate the nearest clinics and book your appointments.</p>
+            <a href="{% url 'Directory' %}" class="btn-primary">Go to Directory</a>
+        </div>
+
+        <div class="info-section">
+            <h2>Pet Care Tips</h2>
+            <p>Explore essential pet care tips for different types of pets. Whether you have a cat, dog, bird, or any other pet, our tips will help you keep them healthy and happy!</p>
+            <a href="{% url 'pet_care_tips' %}" class="btn-primary">View Pet Care Tips</a>
+        </div>
+
+        <div class="info-section">
+            <h2>FAQs</h2>
+            <p>Find answers to frequently asked questions regarding pet care, veterinary services, and more. We aim to provide clear and concise information to assist pet owners.</p>
+            <a href="{% url 'Faq' %}" class="btn-primary">View FAQs</a>
+        </div>
+
+        <div class="info-section">
+            <h2>Contact Us</h2>
+            <p>If you have any questions or need further assistance, feel free to reach out to us. We're here to help!</p>
+            <a href="{% url 'contact' %}" class="btn-primary">Contact Us</a>
+        </div>
+    </div>
+
+    <!-- Right Section (Images of second set of pets) -->
+    <div class="right-images">
+        <img src="{% static 'images/dog111.png' %}" alt="Dog">
+        <img src="{% static 'images/dog222.png' %}" alt="Dog">
+        <img src="{% static 'images/dog333.png' %}" alt="Dog">
+        <img src="{% static 'images/hamster1.png' %}" alt="Hamster">
+        <img src="{% static 'images/hamster2.png' %}" alt="Hamster">
+        <img src="{% static 'images/snake1.png' %}" alt="Snake">
+        <img src="{% static 'images/snake2.png' %}" alt="Snake">
+        <img src="{% static 'images/chinchilla3.png' %}" alt="Chinchilla">
+    </div>
+</div>
+
+{% endblock %}

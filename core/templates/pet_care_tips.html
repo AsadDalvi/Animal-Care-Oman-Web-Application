@@ -1,0 +1,54 @@
+{% extends 'ACO.html' %}
+{% load static %}
+
+{% block content %}
+<div class="pet-care-container">
+    <!-- Left Images (Cat, Dogs, Rabbits, Birds, Turtles) -->
+    <div class="pet-care-images pet-care-left">
+        <img src="{% static 'images/cat11.png' %}" alt="Cat">
+        <img src="{% static 'images/dog11.png' %}" alt="Dog">
+        <img src="{% static 'images/rabbit.png' %}" alt="Rabbit">
+        <img src="{% static 'images/bird.png' %}" alt="Bird">
+        <img src="{% static 'images/turtle.png' %}" alt="Turtle">
+    </div>
+
+    <!-- Pet Care Content -->
+    <div class="pet-care-content">
+        <h2>Pet Care Tips</h2>
+        <p>Search your pet to get tips:</p>
+        <!-- Search Form -->
+        <form method="get" action="{% url 'pet_care_tips' %}">
+            <input type="text" class="search-bar" placeholder="Cat, Dog, Bird...." name="search" value="{{ request.GET.search }}">
+            <button type="submit" class="search-btn">Search</button>
+        </form>
+
+        <ul class="pet-care-list">
+            {% for tip in tips %}
+                <li class="pet-care-item">
+                    <h3>{{ tip.title }}</h3>
+                    <p>{{ tip.content }}</p>
+
+                    {% if user.is_staff %}
+                        <small>Created on: {{ tip.created_at }}</small><br>
+                        <a href="{% url 'edit_pet_care_tip' tip.id %}" class="edit-btn">Edit</a>
+                        <a href="{% url 'delete_pet_care_tip' tip.id %}" class="delete-btn" onclick="return confirm('Are you sure you want to delete this tip?');">Delete</a>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+
+        {% if user.is_staff %}
+            <a href="{% url 'add_pet_care_tip' %}" class="add-btn">Add New Pet Care Tip</a>
+        {% endif %}
+    </div>
+
+    <!-- Right Images (Chinchillas, Hamster, Snakes, Guinea Pig, Tortoise) -->
+    <div class="pet-care-images pet-care-right">
+        <img src="{% static 'images/chinchilla.png' %}" alt="Chinchilla">
+        <img src="{% static 'images/hamster.png' %}" alt="Hamster">
+        <img src="{% static 'images/snake.png' %}" alt="Snake">
+        <img src="{% static 'images/guinea_pig.png' %}" alt="Guinea Pig">
+        <img src="{% static 'images/tortoise.png' %}" alt="Tortoise">
+    </div>
+</div>
+{% endblock %}

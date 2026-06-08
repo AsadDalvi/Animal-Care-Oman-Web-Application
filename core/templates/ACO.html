@@ -1,0 +1,113 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+     <!-- FontAwesome Icons -->
+     <script src="https://kit.fontawesome.com/d57bf660f0.js" crossorigin="anonymous"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animal Care Oman</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <a href="{% url 'home' %}" class="header-link">
+            <h1>Animal Care Oman</h1>
+        </a>
+    </header>
+
+    <!-- Navbar with Toggle Button -->
+    <nav>
+        <button class="menu-button">☰ Menu</button> <!-- Navbar Toggle Button -->
+        <ul class="nav-links">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'Directory' %}">Veterinary Directory</a></li>
+            <li><a href="{% url 'pet_care_tips' %}">Pet Care Tips</a></li>
+            <li><a href="{% url 'Faq' %}">FAQ</a></li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
+            <li><a href="{% url 'about' %}">About Us</a></li>
+
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'user_dashboard' %}">User Dashboard</a></li>
+                {% if user.is_staff %}
+                    <li><a href="{% url 'Admin_dashboard' %}">Admin Dashboard</a></li>
+                {% endif %}
+            {% else %}
+                <li><a href="{% url 'register' %}">Register</a></li>
+                <li><a href="{% url 'login' %}">Login</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <section>
+        {% block content %}
+        <!-- Page-specific content goes here -->
+        {% endblock %}
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'Directory' %}">Veterinary Directory</a></li>
+            <li><a href="{% url 'pet_care_tips' %}">Pet Care Tips</a></li>
+            <li><a href="{% url 'Faq' %}">FAQ</a></li>
+            <li><a href="{% url 'contact' %}">Contact Us</a></li>
+            <li><a href="{% url 'about' %}">About Us</a></li>
+        </ul>
+        <div class="social-icons">
+            <a href="https://www.instagram.com/animalcareoman/" target="_blank">
+                <i class="fab fa-instagram"></i>
+                <span> <- Follow us on Instagram</span>
+            </a>
+        </div>
+        <div class="footer-text">
+            <p>&copy; <span id="year"></span> Animal Care Oman. All rights reserved. Proudly serving Oman.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Navbar Toggle -->
+    <script>
+        // JavaScript code for menu button
+        document.addEventListener("DOMContentLoaded", function () {
+            const menuButton = document.querySelector(".menu-button");
+            const navLinks = document.querySelector(".nav-links");
+
+            menuButton.addEventListener("click", function () {
+                navLinks.classList.toggle("show");
+            });
+        });
+
+        // Setting the current year in the copyright text dynamically
+        document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+
+
+<!-- Floating Veterinarian Chatbot Icon -->
+<div id="chatbot-button" onclick="openChatbot()">💬 A.C.O ChatBot</div>
+
+<!-- Chatbot Popup -->
+<div id="chatbot-container">
+    <iframe id="chatbot-frame" src="https://cdn.botpress.cloud/webchat/v2.2/shareable.html?configUrl=https://files.bpcontent.cloud/2025/03/20/14/20250320140555-IO4GBO24.json"></iframe>
+    <button onclick="closeChatbot()">✖</button>
+</div>
+
+<!-- JavaScript for Chatbot -->
+<script>
+    function openChatbot() {
+        document.getElementById("chatbot-container").style.display = "block";
+    }
+
+    function closeChatbot() {
+        document.getElementById("chatbot-container").style.display = "none";
+    }
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!-- Confirm_delete_clinic.html -->
+{% extends 'ACO.html' %}
+{% load static %}
+
+{% block content %}
+<div class="confirm-delete-container">
+    <h2>Are you sure you want to delete: {{ clinic.name }}?</h2>
+    <div class="form-wrapper">
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="delete-btn">Delete</button>
+        </form>
+    </div>
+    <a href="{% url 'Directory' %}" class="cancel-link">Cancel</a>
+</div>
+{% endblock %}

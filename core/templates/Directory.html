@@ -1,0 +1,69 @@
+{% extends 'ACO.html' %}  <!-- Extending the base template ACO.html -->
+{% load static %}  <!-- Loading static files like CSS, JS -->
+
+{% block content %}
+<div class="directory-container">
+    <h2>Veterinary Directory</h2>
+    <p>Find the best veterinary clinics in Oman.</p>
+
+    <!-- Search Bar -->
+    <div class="vet-search-container">
+        <form method="get" action="{% url 'Directory' %}">
+            <input type="text" class="vet-search-bar" name="q" placeholder="Search Clinics in Oman..." value="{{ request.GET.q }}">
+            <button type="submit" class="vet-search-btn">Search</button>
+        </form>
+    </div>
+
+    <ul class="clinic-list">
+        {% for clinic in clinics %}
+            <li class="clinic-card">
+                <div class="clinic-info">
+                    <h3>{{ clinic.name }}</h3>
+                    <p>{{ clinic.description }}</p>
+                    <p><strong>Address:</strong> {{ clinic.address }}</p>
+                    <p><strong>Phone:</strong> {{ clinic.phone_number }}</p>
+
+                    {% if clinic.website %}
+                        <p><strong>Website:</strong> <a href="{{ clinic.website }}" target="_blank">{{ clinic.website }}</a></p>
+                    {% endif %}
+
+                    {% if clinic.location %}
+                        <p><strong>Location:</strong> <a href="{{ clinic.location }}" target="_blank">{{ clinic.location }}</a></p>
+                    {% endif %}
+
+                    {% if clinic.image %}
+                        <img src="{{ clinic.image.url }}" alt="{{ clinic.name }}" class="clinic-image">
+                    {% endif %}
+                    
+                    <!-- Submit Review Link -->
+                    <a href="{% url 'Submit_review' clinic.id %}" class="btnn-review">Submit Review</a>
+                    
+                    <!-- Display Reviews -->
+                    <h4>Reviews</h4>
+                    <div class="review-list">
+                        {% for review in clinic.clinicreview_set.all %}
+                            <p><strong>{{ review.user.username }}</strong>: ⭐ {{ review.rating }}/5</p>
+                            <p>{{ review.comment }}</p>
+                        {% empty %}
+                            <p>No reviews yet.</p>
+                        {% endfor %}
+                    </div>
+
+                    <!-- Admin Actions (only visible for admin users) -->
+                    {% if user.is_staff %}
+                        <div class="admin-actions">
+                            <a href="{% url 'Edit_clinic' clinic.id %}" class="btnn-edit">Edit</a>
+                            <a href="{% url 'Confirm_delete_clinic' clinic.id %}" class="btnn-delete">Delete</a>
+                        </div>
+                    {% endif %}
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <!-- Add New Clinic (Only visible for Admin users) -->
+    {% if user.is_staff %}
+        <a href="{% url 'Add_clinic' %}" class="btnn-add-clinic">Add New Clinic</a>
+    {% endif %}
+</div>
+{% endblock %}

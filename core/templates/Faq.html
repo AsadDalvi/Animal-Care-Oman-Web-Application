@@ -1,0 +1,41 @@
+{% extends 'ACO.html' %}
+{% load static %}
+
+{% block content %}
+<div class="faq-section">
+    <!-- Left Images -->
+    <div class="faq-gallery faq-left">
+        <img src="{% static 'images/cat1.png' %}" alt="Cat Image 1">
+        <img src="{% static 'images/cat2.png' %}" alt="Cat Image 2">
+    </div>
+
+    <!-- FAQ Main Content -->
+    <div class="faq-main">
+        <h2>Frequently Asked Questions</h2>
+        <ul class="faq-items">
+            {% for faq in faqs %}
+                <li class="faq-box">
+                    <strong>{{ faq.question }}</strong>: {{ faq.answer }}
+
+                    {% if user.is_staff %}
+                        <div class="faq-controls">
+                            <a href="{% url 'edit_faq' faq.id %}" class="faq-edit-btn">Edit</a>
+                            <a href="{% url 'confirm_delete_faq' faq.id %}" class="faq-delete-btn" onclick="return confirm('Are you sure you want to delete this FAQ?');">Delete</a>
+                        </div>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+
+        {% if user.is_staff %}
+            <a href="{% url 'add_faq' %}" class="faq-add-btn">Add New FAQ</a>
+        {% endif %}
+    </div>
+
+    <!-- Right Images -->
+    <div class="faq-gallery faq-right">
+        <img src="{% static 'images/dog1.png' %}" alt="Dog Image 1">
+        <img src="{% static 'images/dog2.png' %}" alt="Dog Image 2">
+    </div>
+</div>
+{% endblock %}

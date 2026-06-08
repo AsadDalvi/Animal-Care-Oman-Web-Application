@@ -1,0 +1,18 @@
+{% extends 'ACO.html' %}
+{% load static %}
+
+{% block content %}
+<div class="clinic-form-container">
+    <h2>{% if clinic %}Edit{% else %}Add{% endif %} Clinic</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-fields">
+            {{ form.as_p }}
+        </div>
+        <button type="submit" class="clinic-submit-btn">
+            {% if clinic %}Save Changes{% else %}Add Clinic{% endif %}
+        </button>
+    </form>
+</div>
+{% endblock %}

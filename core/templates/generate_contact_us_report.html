@@ -1,0 +1,10 @@
+<!-- generate_contact_us_report.html -->
+{% extends 'ACO.html' %}
+
+{% block content %}
+    <h2>Generate Contact Us Report</h2>
+    <form method="POST" action="{% url 'generate_contact_us_report' %}">
+        {% csrf_token %}
+        <button type="submit">Generate Report</button>
+    </form>
+{% endblock %}

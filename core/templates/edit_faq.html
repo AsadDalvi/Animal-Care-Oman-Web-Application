@@ -1,0 +1,24 @@
+<!-- edit_faq.html -->
+{% extends 'ACO.html' %}
+{% load static %}
+
+{% block content %}
+<div class="edit-faq-container">
+    <h2>Edit FAQ</h2>
+
+    <form method="POST" class="faq-form">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="id_question">Question:</label>
+            {{ form.question }}
+        </div>
+
+        <div class="form-group">
+            <label for="id_answer">Answer:</label>
+            {{ form.answer }}
+        </div>
+
+        <button type="submit" class="save-btn">Save Changes</button>
+    </form>
+</div>
+{% endblock %}

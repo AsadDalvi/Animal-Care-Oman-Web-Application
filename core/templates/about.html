@@ -1,0 +1,20 @@
+{% extends 'ACO.html' %}
+{% load static %}
+
+{% block content %}
+<div class="about-container">
+    <h2>About Us</h2>
+
+    <p><strong>Animal Care Oman</strong> is a community-based platform dedicated to supporting pet owners across <strong>Oman.</strong> Our mission is to provide reliable information and resources to help ensure that pets receive the care they deserve.</p>
+
+    <p>As a non-profit initiative, we aim to bridge the gap between pet owners and essential veterinary services. We’re committed to promoting responsible pet ownership and creating a trusted space for pet owners to find answers and connect with the right care.</p>
+
+    <p>Our platform offers a range of resources, including a <strong>veterinary directory</strong>, expert <strong>pet care tips</strong>, and a <strong>veterinarian AI chatbot</strong>, all designed to support the well-being of pets throughout Oman.</p>
+
+    <div class="about-image">
+        <img src="{% static 'images/pets.png' %}" alt="All Pets" />
+    </div>
+
+    <a href="{% url 'home' %}" class="btn-home">Return to Home</a>
+</div>
+{% endblock %}

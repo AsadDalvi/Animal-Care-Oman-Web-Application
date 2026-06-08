@@ -1,0 +1,85 @@
+{% extends 'admin/base_site.html' %}
+
+{% block content %}
+<h2>Admin Dashboard</h2>
+<p>Welcome, Admin! Here you can manage reports and other admin tasks.</p>
+
+<!-- Contact Us Messages Section -->
+<h3>Contact Us Messages</h3>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Message</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for message in contact_messages %}
+            <tr>
+                <td>{{ message.name }}</td>
+                <td>{{ message.email }}</td>
+                <td>{{ message.message }}</td>
+                <td>{{ message.sent_at }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<!-- Manage Reviews Section -->
+<h3>Manage Reviews</h3>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Clinic</th>
+            <th>User</th>
+            <th>Rating</th>
+            <th>Review</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for review in reviews %}
+            <tr>
+                <td>{{ review.clinic.name }}</td>
+                <td>{{ review.user.username }}</td>
+                <td>{{ review.rating }} stars</td>
+                <td>{{ review.review_text }}</td>
+                <td>{{ review.date_submitted }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<!-- Total Reviews Count -->
+<h3>Total Reviews</h3>
+<p>Total Reviews: {{ total_reviews }}</p>
+
+<!-- Generate Report Section -->
+<h3>Generate Report</h3>
+<form method="POST" action="{% url 'generate_contact_us_report' %}">
+    {% csrf_token %}
+    <button type="submit">Generate Report</button>
+</form>
+
+<!-- Generated Reports Section -->
+<h3>Generated Reports</h3>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Report Type</th>
+            <th>Generated At</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for report in reports %}
+            <tr>
+                <td>{{ report.report_type }}</td>
+                <td>{{ report.generated_at }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
