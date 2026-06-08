@@ -2,6 +2,9 @@
 
 A community-focused web application that provides a directory of veterinary clinics in Oman, along with FAQs and informational resources to help pet owners access relevant veterinary services and guidance.
 
+## Link to access the web application
+- [Deployement link will be provided soon]
+  
 ## Technologies Used
 
 * Python
