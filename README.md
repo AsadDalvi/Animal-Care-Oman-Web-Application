@@ -1,4 +1,4 @@
-# Veterinary Clinics Directory (Oman)
+# Animal Care Oman Web Application
 
 A community-focused web application that provides a directory of veterinary clinics in Oman, along with FAQs, informational resources, and an integrated AI chatbot to assist pet owners in accessing veterinary services and relevant guidance.
 
@@ -11,6 +11,7 @@ A community-focused web application that provides a directory of veterinary clin
 * Django
 * HTML
 * CSS
+* JavaScript
 
 ## Features
 
